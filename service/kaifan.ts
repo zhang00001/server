@@ -19,7 +19,7 @@ export var getAllUser = () => {
 
 // }
 export var getAllUserByUsername = (username: String) => {
-    return KaiFanUserModel.find({ username });
+    return KaiFanUserModel.findOne({ username });
 
 }
 

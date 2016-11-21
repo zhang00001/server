@@ -24,9 +24,24 @@ KaiFanRouter.all('/login', async (req, res, next) => {
     //等价于 var username=req.query.username;
     //       var password=req.query.password;
     var {username, password} = req.query;
+    // if (username && password) {
+    //     res.json({ issucess: true, date: req.query });
+    // }
+    //如果传入用户名和密码,则进行身份验证
     if (username && password) {
-        res.json({ issucess: true, date: req.query });
+        //根据用户名查找用户，若用户密码正确，则登陆成功，  返回用户的信息，失败返回错误
+        var user = await KaiFanProxy.getAllUserByUsername(username);
+        if (user.get('password') == password) {
+            res.json({ issucess: true, date: user })
+        } else {
+            res.json({ issucess: false, errMsg: "用户密码不正确" });
+        }
+        //如果没有传入用户名和密码，则返回错误的消息 参数不合法
+    } else {
+        res.json({ issucess: false, errMsg: '参数不合法' })
     }
+
+
 });
 
 export { KaiFanRouter };

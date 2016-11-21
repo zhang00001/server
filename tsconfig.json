@@ -5,6 +5,11 @@
         "module": "commonjs",
         "typeRoots": [
             "node_modules/@types"
-        ]
-    }
+        ],
+        "sourceRoot": "public/src",
+        "outDir": "public/dist"
+    },
+    "files": [
+        "public/src/index.ts"
+    ]
 }
